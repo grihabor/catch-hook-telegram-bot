@@ -6,7 +6,13 @@ from ..catchbot import CatchBot
 
 
 def construct_message_for_user(json_obj):
-    return json.dumps(json_obj, indent=2)
+    repo = json_obj['repository']
+    return '\n'.join([
+        'Name',
+        '----',
+        repo['name'],
+    ])
+
 
 
 def construct_message_list_for_user(json_obj, step=32):
@@ -14,7 +20,7 @@ def construct_message_list_for_user(json_obj, step=32):
     lines = msg.split('\n')
 
     return [
-        '\n'.join(list(itertools.islice(lines, i, i + step)))
+        '```' + '\n'.join(list(itertools.islice(lines, i, i + step))) + '```'
         for i
         in range(0, len(lines), step)
     ]
