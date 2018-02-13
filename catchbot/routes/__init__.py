@@ -14,7 +14,7 @@ def construct_message_list_for_user(json_obj, step=32):
     lines = msg.split('\n')
 
     return [
-        itertools.islice(lines, i, i + step)
+        '\n'.join(list(itertools.islice(lines, i, i + step)))
         for i
         in range(0, len(lines), step)
     ]
