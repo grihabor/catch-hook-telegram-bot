@@ -26,3 +26,5 @@ def start():
     CatchBot.from_env().start()
 
 
+if __name__ == '__main__':
+    cli()
