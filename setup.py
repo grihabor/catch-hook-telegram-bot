@@ -40,7 +40,7 @@ def main():
         author=AUTHOR,
         author_email=EMAIL,
         url=URL,
-        packages=['catchbot'],
+        packages=find_packages(exclude=('tests',)),
         install_requires=REQUIRED,
         setup_requires=[
             'pytest-runner',
