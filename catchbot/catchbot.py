@@ -10,3 +10,5 @@ class CatchBot(Flask):
         bot_token = os.environ['CATCHBOT_TOKEN']
         self.updater = create_updater(bot_token)
         self.updater.start_polling()
+
+        self.chat_id_list = os.environ['CATCHBOT_CHATS'].split(',')
