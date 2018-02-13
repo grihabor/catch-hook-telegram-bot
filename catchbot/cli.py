@@ -1,6 +1,4 @@
-import sys
-
-from catchbot import CatchBot
+from .catchbot import CatchBot
 import argparse
 import logging
 
