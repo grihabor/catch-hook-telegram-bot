@@ -2,6 +2,7 @@ import os
 import logging
 import http.server
 import ssl
+from flask import Flask
 
 
 def _get_logger():
@@ -29,10 +30,16 @@ def _ssl_wrap_socket(httpd, certfile, keyfile):
         _get_logger().info('Using http hook server')
 
 
+class HookServer:
+    def __init__(self, host, port):
+        self.host = host
+        self.port = port
+        self.flask = Flask()
+
+    def run(self):
+        self.flask.run(self.host, self.port)
+
+
 def create_server(host, port, certfile=None, keyfile=None):
-    httpd = http.server.HTTPServer(
-        (host, port),
-        http.server.SimpleHTTPRequestHandler,
-    )
-    _ssl_wrap_socket(httpd, certfile, keyfile)
-    return httpd
+    server = HookServer(host, port)
+    return server

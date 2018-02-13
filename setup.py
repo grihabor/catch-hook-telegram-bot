@@ -8,7 +8,10 @@ URL = 'https://github.com/grihabor/catch-hook-telegram-bot'
 EMAIL = 'grihabor@gmail.com'
 AUTHOR = 'Borodin Gregory'
 
-REQUIRED = ['python-telegram-bot']
+REQUIRED = [
+    'python-telegram-bot',
+    'httpd',
+]
 
 
 def _get_project_path():

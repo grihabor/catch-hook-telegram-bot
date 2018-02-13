@@ -21,7 +21,7 @@ class CatchBot:
                  
     def start(self):
         self.updater.start_polling()
-        self.httpd.serve_forever()
+        self.httpd.run()
 
     def stop(self):
         self.updater.stop()
