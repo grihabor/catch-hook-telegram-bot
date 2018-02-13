@@ -34,7 +34,7 @@ class HookServer:
     def __init__(self, host, port):
         self.host = host
         self.port = port
-        self.flask = Flask()
+        self.flask = Flask(__name__)
 
     def run(self):
         self.flask.run(self.host, self.port)
