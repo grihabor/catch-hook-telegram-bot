@@ -10,9 +10,9 @@ def get_parser():
     logging.basicConfig(level=logging.INFO)
 
     parser = argparse.ArgumentParser(description='Catch hook telegram bot')
-    subparsers = parser.add_subparsers()
+    subparsers = parser.add_subparsers(dest='command')
 
-    subparsers.add_parser('start', help='Start the bot', dest='start')
+    subparsers.add_parser('start', help='Start the bot')
     return parser
 
 
@@ -20,7 +20,7 @@ def cli():
     parser = get_parser()
     parser.parse_args(sys.argv)
 
-    if parser.start:
+    if parser.command == 'start':
         start()
 
 
