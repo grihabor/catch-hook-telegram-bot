@@ -1,5 +1,5 @@
 from catchbot.hook_server import create_server
-from .bot import create_updater
+from .updater import create_updater
 
 
 class CatchBot:
@@ -19,3 +19,9 @@ class CatchBot:
         )
                  
     def start(self):
+        self.updater.start_polling()
+        self.httpd.serve_forever()
+
+    def stop(self):
+        self.updater.stop()
+
