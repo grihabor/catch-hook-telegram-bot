@@ -10,7 +10,7 @@ AUTHOR = 'Borodin Gregory'
 
 REQUIRED = [
     'python-telegram-bot',
-    'httpd',
+    'flask',
 ]
 
 
