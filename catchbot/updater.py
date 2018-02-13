@@ -10,4 +10,3 @@ def create_updater(token):
         updater.dispatcher.add_handler(handler)
         
     return updater
-    
