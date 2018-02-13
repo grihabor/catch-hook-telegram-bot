@@ -12,4 +12,3 @@ def start(bot, update):
             'Add this chat id to your server settings',
         ]),
     )
-    
