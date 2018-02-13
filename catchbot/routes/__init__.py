@@ -10,7 +10,7 @@ def register_routes(app: CatchBot):
         if request.method == 'POST':
             if not request.is_json:
                 return jsonify(dict(msg='Data must be in json format')), 400
-            app.updater.send_message(
+            app.updater.bot.send_message(
                 205613939,
                 json.dumps(request.get_json(cache=False)),
             )
