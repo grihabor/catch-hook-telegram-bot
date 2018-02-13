@@ -9,7 +9,5 @@ def create_updater(token):
         handler = tg.CommandHandler(command.__name__, command)
         updater.dispatcher.add_handler(handler)
         
-        
-def create_hook_server(cert, key):
-    
+    return updater
     
