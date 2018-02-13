@@ -15,3 +15,5 @@ def register_routes(app: CatchBot):
                 json.dumps(request.get_json(cache=False)),
             )
             return jsonify(dict(msg='Data successfully sent to user'))
+
+        return jsonify(dict(msg='Catch hook telegram bot'))
