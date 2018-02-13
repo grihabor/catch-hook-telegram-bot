@@ -1,7 +1,11 @@
 import argparse
+import logging
 
 
 def cli():
+
+    logging.basicConfig(level=logging.INFO)
+
     parser = argparse.ArgumentParser(description='Catch hook telegram bot')
     subparsers = parser.add_subparsers()
 

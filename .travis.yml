@@ -1,3 +1,0 @@
-
-script:
-  - ssh ${DEPLOY_USER}@${DEPLOY_HOST}/catchbot-deploy; docker-compose build --no-cache; docker-compose up
