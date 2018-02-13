@@ -58,7 +58,11 @@ def main():
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 3.6",
         ],
-        scripts=['bin/catchbot']
+        entry_points={
+            'console_scripts': [
+                'catchbot = catchbot.cli:cli'
+            ],
+        }
     )
 
 

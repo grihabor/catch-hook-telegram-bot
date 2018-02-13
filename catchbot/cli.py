@@ -1,7 +1,7 @@
 import argparse
 
 
-def main():
+def cli():
     parser = argparse.ArgumentParser(description='Catch hook telegram bot')
     subparsers = parser.add_subparsers()
 
@@ -9,5 +9,3 @@ def main():
     subparsers.add_subparsers('stop', help='Stop the bot')
 
 
-if __name__ == '__main__':
-    main()
