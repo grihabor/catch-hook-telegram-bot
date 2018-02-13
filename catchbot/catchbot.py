@@ -29,10 +29,13 @@ class CatchBot:
     @classmethod
     def from_env(cls):
         token = os.environ['CATCHBOT_TOKEN']
+
         host = os.environ['CATCHBOT_HOST']
-        port = os.environ['CATCHBOT_PORT']
-        cert = os.environ['CATCHBOT_CERT']
-        key = os.environ['CATCHBOT_KEY']
+        port = int(os.environ['CATCHBOT_PORT'])
+
+        cert = os.getenv('CATCHBOT_CERT', None)
+        key = os.getenv('CATCHBOT_KEY', None)
+
         return CatchBot(token=token,
                         host=host,
                         port=port,
