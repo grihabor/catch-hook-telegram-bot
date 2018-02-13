@@ -11,6 +11,7 @@ AUTHOR = 'Borodin Gregory'
 REQUIRED = [
     'python-telegram-bot',
     'flask',
+    'gunicorn',
 ]
 
 
