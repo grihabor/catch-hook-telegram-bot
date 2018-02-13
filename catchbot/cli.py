@@ -1,5 +1,7 @@
 import subprocess
 
+import os
+
 from .catchbot import CatchBot
 import argparse
 import logging
@@ -21,7 +23,15 @@ def cli():
     args = parser.parse_args()
 
     if args.command == 'start':
-        subprocess.run(['gunicorn', 'catchbot:app'])
+        host = os.environ['CATCHBOT_HOST']
+        port = int(os.environ['CATCHBOT_PORT'])
+
+        subprocess.run([
+            'gunicorn',
+            '-w', '1',
+            '-b', '{}:{}'.format(host, port),
+            'catchbot:app',
+        ])
 
 
 def start():
