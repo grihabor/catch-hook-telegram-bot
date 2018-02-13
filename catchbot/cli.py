@@ -18,7 +18,7 @@ def get_parser():
 
 def cli():
     parser = get_parser()
-    parser.parse_args(sys.argv)
+    parser.parse_args()
 
     if parser.command == 'start':
         start()
