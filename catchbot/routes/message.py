@@ -17,11 +17,15 @@ def _get_value_by_path(json_obj, path):
 def _filter_important_data_for_user(json_obj):
     result = {}
 
-    for key, path in _structure:
+    for key, path in _structure.items():
         if not isinstance(path, str):
             continue
 
-        result[key] = _get_value_by_path(json_obj, path)
+        value = None
+        try:
+            value = _get_value_by_path(json_obj, path)
+        finally:
+            result[key] = '!' + path
 
     return result
 
