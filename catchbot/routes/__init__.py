@@ -6,7 +6,7 @@ from ..catchbot import CatchBot
 
 def _root_post(app):
     if not request.is_json:
-        return jsonify(dict(msg='Data must be in json format')), 400
+        return 'Data must be in json format', 400
 
     for chat_id in app.chat_id_list:
         message_list = create_message_list_for_user(request.get_json(cache=False))
