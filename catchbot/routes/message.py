@@ -40,8 +40,8 @@ def create_message_list_for_user(json_obj, limit=4096):
             json_obj
         )
     )
-    return (
+    return [
         msg
         if len(msg) < limit
         else msg[:limit]
-    )
+    ]
