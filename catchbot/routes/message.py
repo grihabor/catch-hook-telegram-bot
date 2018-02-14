@@ -37,10 +37,20 @@ def _filter_important_data_for_user(json_obj):
     return result
 
 
+def _get_status(json_obj):
+    if json_obj['event'] in ['push']:
+        return OK
+    
+    return FAIL
+    
+
 def _construct_message(json_obj):
     return '\n'.join([
         json_obj['repository'],
-        json_obj['event'],
+        '{} {}'.format(
+            _get_status(json_obj), 
+            json_obj['event'],
+        )
     ])
     
 
