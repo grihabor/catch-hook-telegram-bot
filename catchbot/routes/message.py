@@ -24,8 +24,10 @@ def _filter_important_data_for_user(json_obj):
         value = None
         try:
             value = _get_value_by_path(json_obj, path)
+        except KeyError:
+            value = '!' + path
         finally:
-            result[key] = '!' + path
+            result[key] = value
 
     return result
 
