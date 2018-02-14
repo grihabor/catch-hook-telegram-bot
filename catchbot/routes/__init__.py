@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, jsonify, redirect
 
 from .message import create_message_list_for_user
 from ..catchbot import CatchBot
@@ -17,7 +17,7 @@ def _root_post(app):
 
 
 def _root_get():
-    return jsonify(dict(msg='Catch hook telegram bot'))
+    return redirect('http://t.me/catch_web_hook_bot')
 
 
 def register_routes(app: CatchBot):
