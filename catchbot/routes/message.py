@@ -1,6 +1,11 @@
 _structure = {
     'repository': 'repository.name',
+    'event': '_event',
 }
+
+
+OK = '✅'
+FAIL = '❌'
 
 
 def _filter_step(json_obj):
@@ -33,8 +38,11 @@ def _filter_important_data_for_user(json_obj):
 
 
 def _construct_message(json_obj):
-    return json_obj['repository']
-
+    return '\n'.join([
+        json_obj['repository'],
+        json_obj['event'],
+    ])
+    
 
 def create_message_list_for_user(json_obj, limit=4096):
     msg = _construct_message(
