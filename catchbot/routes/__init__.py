@@ -4,9 +4,14 @@ import itertools
 from flask import request, jsonify
 from ..catchbot import CatchBot
 
+_structure = {
+    'repository': 'repository.name',
+    'event': '',
+}
 
-def construct_message_for_user(json_obj):
+def filter_important_data_for_user(json_obj):
     repo = json_obj['repository']
+    
     return '\n'.join([
         'Name',
         '----',
@@ -16,7 +21,7 @@ def construct_message_for_user(json_obj):
 
 
 def construct_message_list_for_user(json_obj, step=32):
-    msg = construct_message_for_user(json_obj)
+    json_obj = filter_important_data_for_user(json_obj)
     lines = msg.split('\n')
 
     return [
