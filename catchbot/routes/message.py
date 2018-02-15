@@ -6,6 +6,7 @@ def _get_template_path(json_obj):
     return os.path.abspath(os.path.join(
         os.path.abspath(__file__),
         os.pardir,
+        'templates',
         'github',
         '{}.txt'.format(json_obj['event']),
     ))
