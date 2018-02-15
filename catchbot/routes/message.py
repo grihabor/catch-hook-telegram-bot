@@ -30,14 +30,11 @@ def _construct_message(json_obj):
     return template.format(**json_obj)
     
 
-def create_message_list_for_user(json_obj, limit=4096):
+def create_message_for_user(json_obj, limit=4096):
     user_data = filter_important_data_for_user(json_obj)
     msg = _construct_message(user_data)
-    
-    msg_list = []
-    msg_list.append(
+    return (
         msg
         if len(msg) < limit
         else msg[:limit]
     )
-    return msg_list

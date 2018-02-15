@@ -12,6 +12,7 @@ REQUIRED = [
     'python-telegram-bot',
     'flask',
     'gunicorn',
+    'pika',
 ]
 
 

@@ -1,7 +1,7 @@
 import itertools
 from flask import request, jsonify, redirect
 
-from .message import create_message_list_for_user
+from .message import create_message_for_user
 from ..catchbot import CatchBot
 
 
@@ -14,16 +14,21 @@ def _get_info_from_headers(headers):
     return {}
 
 
+def send_message_to_bot(message_list):
+    pass
+
+
 def _root_post(app):
     if not request.is_json:
         return 'Data must be in json format', 400
 
-    for chat_id in app.chat_id_list:
-        json_obj = request.get_json(cache=False)
-        json_obj.update(_get_info_from_headers(request.headers))
-        message_list = create_message_list_for_user(json_obj)
-        for msg in message_list:
-            app.updater.bot.send_message(chat_id, msg)
+    json_obj = request.get_json(cache=False)
+    json_obj.update(_get_info_from_headers(request.headers))
+    message_list = create_message_for_user(json_obj)
+
+    send_message_to_bot(message_list)
+    for msg in message_list:
+        app.updater.bot.send_message(chat_id, msg)
 
     return 'OK', 200
 

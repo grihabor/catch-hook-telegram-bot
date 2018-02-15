@@ -19,7 +19,8 @@ def get_parser():
     parser = argparse.ArgumentParser(description='Catch hook telegram bot')
     subparsers = parser.add_subparsers(dest='command')
 
-    subparsers.add_parser('start', help='Start the bot')
+    subparsers.add_parser('bot', help='Start the bot')
+    subparsers.add_parser('gunicorn', help='Start the bot')
     return parser
 
 
@@ -27,7 +28,7 @@ def cli():
     parser = get_parser()
     args = parser.parse_args()
 
-    if args.command == 'start':
+    if args.command == 'gunicorn':
         host = os.environ['CATCHBOT_HOST']
         port = int(os.environ['CATCHBOT_PORT'])
 
@@ -37,6 +38,9 @@ def cli():
             '-b', '{}:{}'.format(host, port),
             'catchbot:app',
         ])
+
+    if args.command == 'bot':
+        RouterBot.from_env().start()
 
 
 if __name__ == '__main__':

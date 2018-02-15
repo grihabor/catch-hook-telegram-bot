@@ -1,7 +1,7 @@
-from .catchbot import CatchBot
 from .routes import register_routes
+from flask import Flask
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
-app = CatchBot(__name__)
+app = Flask(__name__)
 register_routes(app)
