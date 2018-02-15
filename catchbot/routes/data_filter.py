@@ -30,6 +30,7 @@ def _get_value_by_path(json_obj, path):
 
 
 def filter_important_data_for_user(json_obj):
+    json_obj['_status'] = _get_status(json_obj)
     result = {}
 
     for key, path in _structure.items():
@@ -44,6 +45,5 @@ def filter_important_data_for_user(json_obj):
         finally:
             result[key] = value
     
-    result['status'] = _get_status(result)
     return result
     
