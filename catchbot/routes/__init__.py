@@ -1,40 +1,47 @@
 import itertools
-from flask import request, jsonify
+from flask import request, jsonify, redirect
+
+from .message import create_message_list_for_user
 from ..catchbot import CatchBot
 
 
-def construct_message_for_user(json_obj):
-    repo = json_obj['repository']
-    return '\n'.join([
-        'Name',
-        '----',
-        repo['name'],
-    ])
+def _get_info_from_headers(headers):
+    try:
+        return {'_event': headers['X-GitHub-Event']}
+    except KeyError:
+        pass
+
+    return {}
 
 
-def construct_message_list_for_user(json_obj, step=32):
-    msg = construct_message_for_user(json_obj)
-    lines = msg.split('\n')
+def _root_post(app):
+    if not request.is_json:
+        return 'Data must be in json format', 400
 
-    return [
-        '```' + '\n'.join(list(itertools.islice(lines, i, i + step))) + '```'
-        for i
-        in range(0, len(lines), step)
-    ]
+    for chat_id in app.chat_id_list:
+        json_obj = request.get_json(cache=False)
+        json_obj.update(_get_info_from_headers(request.headers))
+        message_list = create_message_list_for_user(json_obj)
+        for msg in message_list:
+            app.updater.bot.send_message(chat_id, msg)
+
+    return 'OK', 200
+
+
+def _root_get():
+    return redirect('http://t.me/catch_web_hook_bot', code=302)
 
 
 def register_routes(app: CatchBot):
     @app.route('/', methods=['GET', 'POST'])
     def root():
         if request.method == 'POST':
-            if not request.is_json:
-                return jsonify(dict(msg='Data must be in json format')), 400
+            return _root_post(app)
+        if request.method == 'GET':
+            return _root_get()
 
-            for chat_id in app.chat_id_list:
-                message_list = construct_message_list_for_user(request.get_json(cache=False))
-                for msg in message_list:
-                    app.updater.bot.send_message(chat_id, msg)
+        return 'Method not allowed', 405
 
-            return jsonify(dict(msg='Data successfully sent to user'))
 
-        return jsonify(dict(msg='Catch hook telegram bot'))
+
+
