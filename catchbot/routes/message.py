@@ -1,42 +1,8 @@
-_structure = {
-    'repository': 'repository.name',
-    'event': '_event',
-    'compare': 'compare',
-    'status_icon': '_status',
-}
+from .data_filter import filter_important_data_for_user
 
 
 OK = '✅'
 FAIL = '❌'
-
-
-def _filter_step(json_obj):
-    pass
-
-
-def _get_value_by_path(json_obj, path):
-    value = json_obj
-    for path_key in path.split('.'):
-        value = value[path_key]
-    return value
-
-
-def _filter_important_data_for_user(json_obj):
-    result = {}
-
-    for key, path in _structure.items():
-        if not isinstance(path, str):
-            continue
-
-        value = None
-        try:
-            value = _get_value_by_path(json_obj, path)
-        except KeyError:
-            value = '!' + path
-        finally:
-            result[key] = value
-
-    return result
 
 
 def _get_status(json_obj):
@@ -63,14 +29,14 @@ def _construct_message(json_obj):
     
 
 def create_message_list_for_user(json_obj, limit=4096):
-    json_obj['_status'] = _get_status(json_obj)
-    msg = _construct_message(
-        _filter_important_data_for_user(
-            json_obj
-        )
-    )
-    return [
+    user_data = filter_important_data_for_user(json_obj)
+    user_data['_status'] = _get_status(user_data)
+    msg = _construct_message(user_data)
+    
+    msg_list = []
+    msg_list.append(
         msg
         if len(msg) < limit
         else msg[:limit]
-    ]
+    )
+    return msg_list
