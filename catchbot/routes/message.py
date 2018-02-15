@@ -3,12 +3,12 @@ from .data_filter import filter_important_data_for_user
     
     
 def _get_template_path(json_obj):
-    return os.path.join(
+    return os.path.abspath(os.path.join(
         os.path.abspath(__file__),
         os.pardir,
         'github',
         '{}.txt'.format(json_obj['event']),
-    )
+    ))
     
 
 def _construct_message(json_obj):
