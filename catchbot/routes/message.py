@@ -50,12 +50,13 @@ def _get_template_path(json_obj):
     return os.path.join(
         os.path.abspath(__file__),
         os.pardir,
-        'template.txt',
+        'github',
+        '{}.txt'.format(json_obj['event']),
     )
     
 
 def _construct_message(json_obj):
-    with open('template.txt', 'r') as f:
+    with open(_get_template_path(json_obj), 'r') as f:
         template = f.read()
     
     return template.format(**json_obj)
