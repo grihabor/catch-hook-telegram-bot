@@ -1,5 +1,3 @@
-import json
-
 import itertools
 from flask import request, jsonify
 from ..catchbot import CatchBot
@@ -12,7 +10,6 @@ def construct_message_for_user(json_obj):
         '----',
         repo['name'],
     ])
-
 
 
 def construct_message_list_for_user(json_obj, step=32):
