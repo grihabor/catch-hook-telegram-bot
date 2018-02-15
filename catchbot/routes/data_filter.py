@@ -6,6 +6,17 @@ _structure = {
 }
 
 
+OK = '✅'
+FAIL = '❌'
+
+
+def _get_status(json_obj):
+    if json_obj['event'] in ['push']:
+        return OK
+    
+    return FAIL
+
+
 def _filter_step(json_obj):
     pass
 
@@ -31,6 +42,7 @@ def filter_important_data_for_user(json_obj):
             value = '!' + path
         finally:
             result[key] = value
-
+    
+    result['status'] = _get_status(result)
     return result
     
