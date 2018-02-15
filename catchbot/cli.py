@@ -2,9 +2,14 @@ import subprocess
 
 import os
 
-from .catchbot import CatchBot
 import argparse
 import logging
+
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO,
+)
 
 
 def get_parser():
@@ -32,10 +37,6 @@ def cli():
             '-b', '{}:{}'.format(host, port),
             'catchbot:app',
         ])
-
-
-def start():
-    CatchBot.from_env().start()
 
 
 if __name__ == '__main__':
