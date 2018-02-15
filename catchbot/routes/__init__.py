@@ -14,7 +14,7 @@ def _get_info_from_headers(headers):
     return {}
 
 
-def _root_post(app):
+def _hook(chat_id, hash):
     if not request.is_json:
         return 'Data must be in json format', 400
 
@@ -29,19 +29,18 @@ def _root_post(app):
     return 'OK', 200
 
 
-def _root_get():
+def _root():
     return redirect('http://t.me/catch_web_hook_bot', code=302)
 
 
 def register_routes(app):
-    @app.route('/hooks/<chat_id>/<hash>', methods=['GET', 'POST'])
-    def root(chat_id, hash):
-        if request.method == 'POST':
-            return _root_post(app)
-        if request.method == 'GET':
-            return _root_get()
+    @app.route('/hooks/<chat_id>/<hash>', methods=['POST'])
+    def hook(chat_id, hash):
+        return _hook(chat_id, hash)
 
-        return 'Method not allowed', 405
+    @app.route('/', methods=['GET'])
+    def root():
+        return _root()
 
 
 
