@@ -1,3 +1,4 @@
+
 _structure = {
     'repository': 'repository.name',
     'event': '_event',
