@@ -2,7 +2,7 @@ import os
 from flask import request, jsonify, redirect
 
 from .message import create_message_for_user
-from ..celery_app import send_message_to_bot
+from ..tasks import send_message_to_bot
 
 
 def _get_info_from_headers(headers):
