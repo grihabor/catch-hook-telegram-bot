@@ -1,8 +1,9 @@
-import itertools
+import os
 from flask import request, jsonify, redirect
 
 from .message import create_message_for_user
-from ..catchbot import CatchBot
+from ..router_bot import CatchBot
+from ..celery_app import send_message_to_bot
 
 
 def _get_info_from_headers(headers):
@@ -14,21 +15,17 @@ def _get_info_from_headers(headers):
     return {}
 
 
-def send_message_to_bot(message_list):
-    pass
-
-
 def _root_post(app):
     if not request.is_json:
         return 'Data must be in json format', 400
 
     json_obj = request.get_json(cache=False)
     json_obj.update(_get_info_from_headers(request.headers))
-    message_list = create_message_for_user(json_obj)
+    msg = create_message_for_user(json_obj)
 
-    send_message_to_bot(message_list)
-    for msg in message_list:
-        app.updater.bot.send_message(chat_id, msg)
+    chat_id = os.environ['CATCHBOT_CHAT_ID_LIST']
+
+    send_message_to_bot.delay(chat_id, msg)
 
     return 'OK', 200
 
@@ -38,8 +35,8 @@ def _root_get():
 
 
 def register_routes(app: CatchBot):
-    @app.route('/', methods=['GET', 'POST'])
-    def root():
+    @app.route('/hooks/<chat_id>/<hash>', methods=['GET', 'POST'])
+    def root(chat_id, hash):
         if request.method == 'POST':
             return _root_post(app)
         if request.method == 'GET':
