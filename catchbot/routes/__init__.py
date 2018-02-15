@@ -2,7 +2,6 @@ import os
 from flask import request, jsonify, redirect
 
 from .message import create_message_for_user
-from ..router_bot import CatchBot
 from ..celery_app import send_message_to_bot
 
 
@@ -34,7 +33,7 @@ def _root_get():
     return redirect('http://t.me/catch_web_hook_bot', code=302)
 
 
-def register_routes(app: CatchBot):
+def register_routes(app):
     @app.route('/hooks/<chat_id>/<hash>', methods=['GET', 'POST'])
     def root(chat_id, hash):
         if request.method == 'POST':
