@@ -3,27 +3,7 @@ from flask import request, jsonify, redirect
 
 from .message import create_message_for_user
 from ..tasks import send_message_to_bot
-
-
-_header_host_mapping = {
-    'X-GitHub-Event': 'github',
-    'X-Gitlab-Event': 'gitlab',
-}
-
-
-def _get_info_from_headers(headers):
-
-    _event = None
-    _host = None
-
-    for key, host in _header_host_mapping.items():
-        if key not in headers:
-            continue
-        _event = headers[key]
-        _host = host
-        break
-
-    return {'_event': _event, '_host': _host}
+from .header_parser import get_info_from_headers
 
 
 def _hook(chat_id, hash):
@@ -31,7 +11,7 @@ def _hook(chat_id, hash):
         return 'Data must be in json format', 400
 
     json_obj = request.get_json(cache=False)
-    json_obj.update(_get_info_from_headers(request.headers))
+    json_obj.update(get_info_from_headers(request.headers))
     msg = create_message_for_user(json_obj)
 
     chat_id = os.environ['CATCHBOT_CHAT_ID_LIST']
