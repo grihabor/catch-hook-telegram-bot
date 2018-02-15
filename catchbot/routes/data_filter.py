@@ -13,7 +13,7 @@ FAIL = '❌'
 
 
 def _get_status(json_obj):
-    if json_obj['_event'] in ['push']:
+    if json_obj['_event'] in ['push', 'pull_request']:
         return OK
     
     return FAIL
