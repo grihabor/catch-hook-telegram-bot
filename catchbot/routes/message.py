@@ -2,14 +2,19 @@ import os
 from .data_filter import filter_important_data_for_user
     
     
+DIR_TEMPLATES = os.path.abspath(os.path.join(
+    os.path.abspath(__file__),
+    os.pardir,
+    'templates',
+))
+    
+    
 def _get_template_path(json_obj):
-    return os.path.abspath(os.path.join(
-        os.path.abspath(__file__),
-        os.pardir,
-        'templates',
+    return os.path.join(
+        DIR_TEMPLATES,
         'github',
         '{}.txt'.format(json_obj['event']),
-    ))
+    )
     
 
 def _construct_message(json_obj):
