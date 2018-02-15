@@ -5,13 +5,25 @@ from .message import create_message_for_user
 from ..tasks import send_message_to_bot
 
 
-def _get_info_from_headers(headers):
-    try:
-        return {'_event': headers['X-GitHub-Event']}
-    except KeyError:
-        pass
+_header_host_mapping = {
+    'X-GitHub-Event': 'github',
+    'X-Gitlab-Event': 'gitlab',
+}
 
-    return {}
+
+def _get_info_from_headers(headers):
+
+    _event = None
+    _host = None
+
+    for key, host in _header_host_mapping.items():
+        if key not in headers:
+            continue
+        _event = headers[key]
+        _host = host
+        break
+
+    return {'_event': _event, '_host': _host}
 
 
 def _hook(chat_id, hash):

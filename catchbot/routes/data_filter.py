@@ -1,9 +1,10 @@
 
 _structure = {
     'repository': 'repository.name',
-    'event': '_event',
     'compare': 'compare',
     'status_icon': '_status',
+    'event': '_event',
+    'host': '_host',
 }
 
 
