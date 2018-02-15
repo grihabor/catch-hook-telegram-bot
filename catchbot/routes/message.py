@@ -7,14 +7,20 @@ DIR_TEMPLATES = os.path.abspath(os.path.join(
     os.pardir,
     'templates',
 ))
+DEFAULT_PATH = os.path.join(
+    DIR_TEMPLATES, 'github', 'push.txt'
+)
     
     
 def _get_template_path(json_obj):
-    return os.path.join(
+    path = os.path.join(
         DIR_TEMPLATES,
         'github',
         '{}.txt'.format(json_obj['event']),
     )
+    if not os.path.exists(path):
+        path = DEFAULT_PATH
+    return path
     
 
 def _construct_message(json_obj):
