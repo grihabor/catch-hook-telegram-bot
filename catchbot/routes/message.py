@@ -1,6 +1,8 @@
 _structure = {
     'repository': 'repository.name',
     'event': '_event',
+    'compare': 'compare',
+    'status_icon': '_status',
 }
 
 
@@ -43,18 +45,24 @@ def _get_status(json_obj):
     
     return FAIL
     
+    
+def _get_template_path(json_obj):
+    return os.path.join(
+        os.path.abspath(__file__),
+        os.pardir,
+        'template.txt',
+    )
+    
 
 def _construct_message(json_obj):
-    return '\n'.join([
-        json_obj['repository'],
-        '{} {}'.format(
-            _get_status(json_obj), 
-            json_obj['event'],
-        )
-    ])
+    with open('template.txt', 'r') as f:
+        template = f.read()
+    
+    return template.format(**json_obj)
     
 
 def create_message_list_for_user(json_obj, limit=4096):
+    json_obj['_status'] = _get_status(json_obj)
     msg = _construct_message(
         _filter_important_data_for_user(
             json_obj
