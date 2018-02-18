@@ -1,12 +1,8 @@
 import os
 from .data_filter import filter_important_data_for_user
+from catchbot.config import DIR_TEMPLATES
     
-    
-DIR_TEMPLATES = os.path.abspath(os.path.join(
-    os.path.abspath(__file__),
-    os.pardir,
-    'templates',
-))
+
 DEFAULT_PATH = os.path.join(
     DIR_TEMPLATES, 'github', 'push.txt'
 )
