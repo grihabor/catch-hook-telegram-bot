@@ -15,7 +15,7 @@ DEFAULT_PATH = os.path.join(
 def _get_template_path(json_obj):
     path = os.path.join(
         DIR_TEMPLATES,
-        'github',
+        json_obj['host'],
         '{}.txt'.format(json_obj['event']),
     )
     if not os.path.exists(path):
