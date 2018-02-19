@@ -5,6 +5,7 @@ _structure = {
     'status_icon': '_status',
     'event': '_event',
     'host': '_host',
+    'branch': 'ref',
 }
 
 

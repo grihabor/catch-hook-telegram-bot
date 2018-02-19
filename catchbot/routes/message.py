@@ -1,22 +1,18 @@
 import os
 from .data_filter import filter_important_data_for_user
+from catchbot.config import DIR_TEMPLATES
     
-    
-DIR_TEMPLATES = os.path.abspath(os.path.join(
-    os.path.abspath(__file__),
-    os.pardir,
-    'templates',
-))
+
 DEFAULT_PATH = os.path.join(
-    DIR_TEMPLATES, 'github', 'push.txt'
+    DIR_TEMPLATES, 'github', 'push.md'
 )
     
     
 def _get_template_path(json_obj):
     path = os.path.join(
         DIR_TEMPLATES,
-        'github',
-        '{}.txt'.format(json_obj['event']),
+        json_obj['host'],
+        '{}.md'.format(json_obj['event']),
     )
     if not os.path.exists(path):
         path = DEFAULT_PATH
