@@ -33,7 +33,7 @@ def _get_value_by_path(json_obj, path):
 
 def filter_important_data_for_user(json_obj):
     if 'event' not in json_obj:
-        json_obj['event'] = json_obj['object_type']
+        json_obj['event'] = json_obj['object_kind']
     json_obj['_status'] = _get_status(json_obj)
     result = {}
 
