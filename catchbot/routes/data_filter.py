@@ -14,7 +14,7 @@ FAIL = '❌'
 
 
 def _get_status(json_obj):
-    if json_obj['_event'] in ['push', 'pull_request']:
+    if json_obj['event'] in ['push', 'pull_request']:
         return OK
     
     return FAIL
