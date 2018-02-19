@@ -1,3 +1,6 @@
+from catchbot.config import load_mapping
+
+
 _header_host_mapping = {
     'X-GitHub-Event': [
         'github',
@@ -8,6 +11,7 @@ _header_host_mapping = {
         lambda x: '_'.join(x.lower().split()[:-1]),
     ],
 }
+
 
 def get_info_from_headers(headers):
 
