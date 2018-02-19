@@ -1,0 +1,26 @@
+dynamic: 
+  status:
+    - text
+    - icon
+  branch: 
+    - name
+    - url
+
+hosts:
+  github:
+    header: 'X-GitHub-Event'
+    store_header_value: 'event'
+    static:
+      ref: 'ref'
+      action: 'action'
+      repository:
+        name: 'repository.name'
+        url: 'repository.url'
+  gitlab:
+    header: 'X-Gitlab-Event'
+    static:
+      ref: 'ref'
+      action: 'action'
+      repository:
+        name: 'project.name'
+        url: 'project.web_url'

@@ -3,8 +3,8 @@ _structure = {
     'repository': 'repository.name',
     'compare': 'compare',
     'status_icon': '_status',
-    'event': '_event',
-    'host': '_host',
+    'event': 'event',
+    'host': 'host',
     'branch': 'ref',
 }
 
