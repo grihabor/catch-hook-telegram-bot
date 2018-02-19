@@ -13,6 +13,7 @@ REQUIRED = [
     'flask',
     'gunicorn',
     'celery',
+    'pyyaml',
 ]
 
 
