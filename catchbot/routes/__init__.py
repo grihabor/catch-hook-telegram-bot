@@ -14,8 +14,6 @@ def _hook(chat_id, hash):
     json_obj.update(get_info_from_headers(request.headers))
     msg = create_message_for_user(json_obj)
 
-    chat_id = os.environ['CATCHBOT_CHAT_ID_LIST']
-
     send_message_to_bot.delay(chat_id, msg)
 
     return 'OK', 200
