@@ -6,6 +6,7 @@ _structure = {
     'event': 'event',
     'host': 'host',
     'branch': 'ref',
+    'branch_url': 'repository.web_url'
 }
 
 
