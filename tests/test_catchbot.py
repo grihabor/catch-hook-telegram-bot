@@ -8,5 +8,4 @@ def test_mapping_yml():
         content = yaml.load(f)
  
     print(content)
-    assert 0
     
