@@ -6,7 +6,7 @@ from catchbot.config import DIR_TEMPLATES, load_mapping
 
 
 DEFAULT_PATH = os.path.join(
-    DIR_TEMPLATES, 'github', 'push.md'
+    DIR_TEMPLATES, 'default.md'
 )
     
     
