@@ -8,6 +8,6 @@ import pytest
      {'branch': 'master'}),
 ])
 def test_dynamic_content(mapping, static_content, loaders, expected):
-    from catchbot.routes.content import get_dynamic_msg_content
+    from catchbot.message.content import get_dynamic_msg_content
 
     assert expected == get_dynamic_msg_content(mapping, static_content, loaders)

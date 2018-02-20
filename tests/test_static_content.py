@@ -25,7 +25,7 @@ import pytest
     }),
 ])
 def test_static_content(mapping, json_obj, expected):
-    from catchbot.routes.content.static import get_static_msg_content
+    from catchbot.message.content import get_static_msg_content
 
     assert expected == get_static_msg_content(mapping, json_obj)
 

@@ -1,4 +1,4 @@
-from catchbot.routes.content.loaders import get_loaders
+from catchbot.message.content.loaders import get_loaders
 from .dynamic import get_dynamic_msg_content
 from .static import get_static_msg_content
 

@@ -1,9 +1,9 @@
 import os
 from flask import request, jsonify, redirect
 
+from catchbot.message.header_parser import get_info_from_headers
 from .message import create_message_for_user
-from ..tasks import send_message_to_bot
-from .header_parser import get_info_from_headers
+from .tasks import send_message_to_bot
 
 
 def _hook(chat_id, hash):
