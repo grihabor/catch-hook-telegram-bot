@@ -14,6 +14,8 @@ REQUIRED = [
     'gunicorn',
     'celery',
     'pyyaml',
+    'beautifulsoup4',
+    'requests',
 ]
 
 

@@ -1,4 +1,6 @@
 import os
+
+from catchbot.message.header_parser import get_info_from_headers
 from .content import get_message_content_for_user
 from catchbot.config import DIR_TEMPLATES, load_mapping
 
@@ -26,10 +28,12 @@ def _render_template(json_obj):
     return template.format(**json_obj)
     
 
-def create_message_for_user(json_obj, limit=4096):
+def create_message_for_user(headers, json_obj, limit=4096):
+
+    json_obj.update(get_info_from_headers(headers))
 
     mapping = load_mapping()
-    host = mapping['host']
+    host = json_obj['host']
 
     msg_content = get_message_content_for_user(
         json_obj,

@@ -11,8 +11,7 @@ def _hook(chat_id, hash):
         return 'Data must be in json format', 400
 
     json_obj = request.get_json(cache=False)
-    json_obj.update(get_info_from_headers(request.headers))
-    msg = create_message_for_user(json_obj)
+    msg = create_message_for_user(request.headers, json_obj)
 
     send_message_to_bot.delay(chat_id, msg)
 
