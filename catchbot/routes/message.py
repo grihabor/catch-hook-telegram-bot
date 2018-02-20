@@ -1,6 +1,7 @@
 import os
-from .data_filter import get_message_content_for_user
+from .content import get_message_content_for_user
 from catchbot.config import DIR_TEMPLATES, load_mapping
+
 
 DEFAULT_PATH = os.path.join(
     DIR_TEMPLATES, 'github', 'push.md'
@@ -18,7 +19,7 @@ def _get_template_path(json_obj):
     return path
     
 
-def _construct_message(json_obj):
+def _render_template(json_obj):
     with open(_get_template_path(json_obj), 'r') as f:
         template = f.read()
     
@@ -30,13 +31,13 @@ def create_message_for_user(json_obj, limit=4096):
     mapping = load_mapping()
     host = mapping['host']
 
-    user_data = get_message_content_for_user(
+    msg_content = get_message_content_for_user(
         json_obj,
         static_mapping=mapping['hosts'][host]['static'],
         dynamic_mapping=mapping['dynamic'],
     )
 
-    msg = _construct_message(user_data)
+    msg = _render_template(msg_content)
     return (
         msg
         if len(msg) < limit
