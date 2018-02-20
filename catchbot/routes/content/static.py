@@ -12,6 +12,7 @@ def get_static_msg_content(mapping, json_obj):
     for key, value_obj in mapping.items():
         if not isinstance(value_obj, str):
             result[key] = get_static_msg_content(value_obj, json_obj)
+            continue
 
         path = value_obj
 
