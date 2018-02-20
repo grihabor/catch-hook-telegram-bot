@@ -13,6 +13,7 @@ hosts:
     static:
       ref: 'ref'
       action: 'action'
+      host: 'host'
       repository:
         name: 'repository.name'
         url: 'repository.url'
@@ -21,6 +22,8 @@ hosts:
     static:
       ref: 'ref'
       action: 'action'
+      event: 'object_kind'
+      host: 'host'
       repository:
         name: 'project.name'
         url: 'project.web_url'
