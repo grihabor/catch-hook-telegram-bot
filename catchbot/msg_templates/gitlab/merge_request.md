@@ -1,2 +1,2 @@
 *{repository['name']}*
-{status['icon']} {event}
+{status['icon']} {event} {action}
