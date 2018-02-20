@@ -1,7 +1,6 @@
 import os
-from .data_filter import filter_important_data_for_user
-from catchbot.config import DIR_TEMPLATES
-    
+from .data_filter import get_message_content_for_user
+from catchbot.config import DIR_TEMPLATES, load_mapping
 
 DEFAULT_PATH = os.path.join(
     DIR_TEMPLATES, 'github', 'push.md'
@@ -27,7 +26,16 @@ def _construct_message(json_obj):
     
 
 def create_message_for_user(json_obj, limit=4096):
-    user_data = filter_important_data_for_user(json_obj)
+
+    mapping = load_mapping()
+    host = mapping['host']
+
+    user_data = get_message_content_for_user(
+        json_obj,
+        static_mapping=mapping['hosts'][host]['static'],
+        dynamic_mapping=mapping['dynamic'],
+    )
+
     msg = _construct_message(user_data)
     return (
         msg

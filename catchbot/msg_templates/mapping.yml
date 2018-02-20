@@ -1,10 +1,10 @@
 dynamic: 
   status:
-    - text
-    - icon
+    text: 'get_status_text'
+    icon: 'get_status_icon'
   branch: 
-    - name
-    - url
+    name: 'get_branch_name'
+    url: 'get_branch_url'
 
 hosts:
   github:

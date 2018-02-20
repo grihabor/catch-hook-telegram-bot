@@ -1,5 +1,5 @@
 from catchbot import load_mapping
-
+from catchbot.routes.content.loaders import get_loaders
 
 _structure = {
     'repository': 'repository.name',
@@ -12,19 +12,6 @@ _structure = {
 }
 
 
-OK = '✅'
-FAIL = '❌'
-
-
-def _get_status(json_obj):
-    if json_obj['event'] in ['push', 'pull_request']:
-        return OK
-    
-    return FAIL
-
-
-def _filter_step(json_obj):
-    pass
 
 
 def _get_value_by_path(json_obj, path):
@@ -34,13 +21,13 @@ def _get_value_by_path(json_obj, path):
     return value
 
 
-def _fill_msg_content(mapping, json_obj):
+def get_static_msg_content(mapping, json_obj):
     result = {}
-    for key, obj in mapping.items():
-        if not isinstance(obj, str):
-            result[key] = _fill_msg_content(obj, json_obj)
-        
-        path = obj
+    for key, value_obj in mapping.items():
+        if not isinstance(value_obj, str):
+            result[key] = get_static_msg_content(value_obj, json_obj)
+
+        path = value_obj
 
         value = None
         try:
@@ -49,23 +36,28 @@ def _fill_msg_content(mapping, json_obj):
             value = '!' + path
         finally:
             result[key] = value
-    
+
     return result
 
 
-def filter_important_data_for_user(json_obj):
-    msg_content = {}
-    mapping = load_mapping()
-    host = json_obj['host']
-    content = _fill_msg_content(
-        mapping['hosts'][host]['static'],
-        json_obj,
+def get_dynamic_msg_content(mapping, json_obj):
+    result = {}
+
+    for key, value in mapping.items():
+        if not isinstance(value, str):
+            result[key] = get_dynamic_msg_content(value, json_obj)
+            continue
+
+        result[key] = get_loaders()[value]
+
+    return result
+
+
+def get_message_content_for_user(json_obj, static_mapping, dynamic_mapping):
+    content = get_static_msg_content(static_mapping, json_obj)
+    content.update(
+        get_dynamic_msg_content(dynamic_mapping, json_obj)
     )
-    
-    content.update(_get_dynamic_content(
-        mapping['dynamic']
-    ))
-    
     return content
     
     
