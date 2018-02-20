@@ -1,3 +1,5 @@
+from catchbot import load_mapping
+
 
 _structure = {
     'repository': 'repository.name',
@@ -32,15 +34,13 @@ def _get_value_by_path(json_obj, path):
     return value
 
 
-def filter_important_data_for_user(json_obj):
-    if 'event' not in json_obj:
-        json_obj['event'] = json_obj['object_kind']
-    json_obj['_status'] = _get_status(json_obj)
+def _fill_msg_content(mapping, json_obj):
     result = {}
-
-    for key, path in _structure.items():
-        if not isinstance(path, str):
-            continue
+    for key, obj in mapping.items():
+        if not isinstance(obj, str):
+            result[key] = _fill_msg_content(obj, json_obj)
+        
+        path = obj
 
         value = None
         try:
@@ -51,4 +51,21 @@ def filter_important_data_for_user(json_obj):
             result[key] = value
     
     return result
+
+
+def filter_important_data_for_user(json_obj):
+    msg_content = {}
+    mapping = load_mapping()
+    host = json_obj['host']
+    content = _fill_msg_content(
+        mapping['hosts'][host]['static'],
+        json_obj,
+    )
+    
+    content.update(_get_dynamic_content(
+        mapping['dynamic']
+    ))
+    
+    return content
+    
     
