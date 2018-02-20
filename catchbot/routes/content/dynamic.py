@@ -1,7 +1,5 @@
-from .loaders import get_loaders
 
-
-def get_dynamic_msg_content(mapping, static_content):
+def get_dynamic_msg_content(mapping, static_content, loaders):
     result = {}
 
     for key, value in mapping.items():
@@ -9,6 +7,6 @@ def get_dynamic_msg_content(mapping, static_content):
             result[key] = get_dynamic_msg_content(value, static_content)
             continue
 
-        result[key] = get_loaders()[value]
+        result[key] = loaders[value]
 
     return result
