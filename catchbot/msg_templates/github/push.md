@@ -1,4 +1,4 @@
-*{repository}*
-{status_icon} {event}
+*{repository['name']}*
+{status['icon']} {event} [{branch['name']}]({branch['url']})
 
 {compare}
