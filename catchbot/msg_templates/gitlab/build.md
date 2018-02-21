@@ -1,3 +1,2 @@
-
-
-{event}
+*{repository[name]}*
+{status[icon]} {event}
