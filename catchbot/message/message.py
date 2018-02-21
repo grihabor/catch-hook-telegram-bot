@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 from catchbot.message.header_parser import get_info_from_headers
 from .content import get_message_content_for_user
@@ -24,7 +25,8 @@ def _get_template_path(json_obj):
 def _render_template(json_obj, path):
     with open(path, 'r') as f:
         template = f.read()
-    
+
+    pprint(json_obj)
     return template.format(**json_obj)
     
 
