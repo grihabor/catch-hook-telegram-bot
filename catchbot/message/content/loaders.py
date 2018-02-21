@@ -63,10 +63,10 @@ def get_gitlab_create_merge_request_url(content):
 
     result.args = {
         'utf8': '✓',
-        'merge_request[source_project_id]': content['merge']['source']['repository_id'],
-        'merge_request[source_branch]': content['merge']['source']['branch'],
-        'merge_request[target_project_id]': content['merge']['target']['repository_id'],
-        'merge_request[target_branch]': content['merge']['target']['branch'],
+        'merge_request[source_project_id]': content['repository']['id'],
+        'merge_request[source_branch]': get_branch_name(content),
+        'merge_request[target_project_id]': content['repository']['id'],
+        'merge_request[target_branch]': content['repository']['default_branch'],
     }
 
     return result

@@ -7,6 +7,8 @@ def get_dynamic_msg_content(mapping, static_content, loaders):
             result[key] = get_dynamic_msg_content(value, static_content, loaders)
             continue
 
-        result[key] = loaders[value](static_content)
+        loader = loaders[value]
+        x = loader(static_content)
+        result[key] = x
 
     return result

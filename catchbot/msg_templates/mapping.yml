@@ -27,8 +27,10 @@ hosts:
         text: 'object_attributes.status'
       host: 'host'
       repository:
+        id: 'project.id'
         name: 'project.name|repository.name'
         url: 'project.web_url'
+        default_branch: 'project.default_branch'
       merge:
         target:
           branch: 'object_attributes.target_branch'
