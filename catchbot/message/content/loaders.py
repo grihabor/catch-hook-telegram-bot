@@ -3,6 +3,7 @@ from furl import furl
 OK = '✅'
 FAIL = '❌'
 OPEN = '🆕'
+STAR = '✴️'
 
 
 def get_loaders():
@@ -42,6 +43,9 @@ def get_status_icon(content):
     
     if content['event'] == 'merge_request' and content['merge']['action'] == 'merge':
         return OK
+    
+    if content['event'] == 'merge_request' and content['merge']['action'] == 'update':
+        return STAR
         
     return FAIL
 
