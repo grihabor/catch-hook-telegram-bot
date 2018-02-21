@@ -26,7 +26,6 @@ def _render_template(json_obj, path):
     with open(path, 'r') as f:
         template = f.read()
 
-    pprint(json_obj)
     return template.format(**json_obj)
     
 
