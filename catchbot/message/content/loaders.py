@@ -39,7 +39,10 @@ def get_status_icon(content):
     if any([content['event'] == 'merge_request' and content['merge']['action'] == 'open',
             content['event'] == 'issue' and content['issue']['action'] == 'open']):
         return OPEN
-
+    
+    if content['event'] == 'merge_request' and content['merge']['action'] == 'merge':
+        return OK
+        
     return FAIL
 
 
