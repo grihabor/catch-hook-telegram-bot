@@ -4,7 +4,8 @@ OK = '✅'
 FAIL = '❌'
 OPEN = '🆕'
 STAR = '✴️'
-
+PAUSE = '⏸'
+PLAY = '▶️'
 
 def get_loaders():
     arr = [
@@ -46,7 +47,13 @@ def get_status_icon(content):
     
     if content['event'] == 'merge_request' and content['merge']['action'] == 'update':
         return STAR
-        
+     
+    if content['event'] == 'pipeline' and content['status'] == 'pending':
+        return PAUSE
+     
+    if content['event'] == 'pipeline' and content['status'] == 'running':
+        return PLAY
+     
     return FAIL
 
 
