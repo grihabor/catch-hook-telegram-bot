@@ -1,6 +1,5 @@
 dynamic: 
   status:
-    text: 'get_status_text'
     icon: 'get_status_icon'
   branch: 
     name: 'get_branch_name'
@@ -23,6 +22,8 @@ hosts:
       ref: 'ref'
       action: 'action'
       event: 'object_kind'
+      status:
+        text: 'object_attributes.status'
       host: 'host'
       repository:
         name: 'project.name'
