@@ -16,6 +16,7 @@ REQUIRED = [
     'pyyaml',
     'beautifulsoup4',
     'requests',
+    'furl',
 ]
 
 

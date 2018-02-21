@@ -38,3 +38,5 @@ def test_gitlab_hooks(headers, json_obj):
     print(msg)
     assert '!' not in msg
 
+    assert 0
+
