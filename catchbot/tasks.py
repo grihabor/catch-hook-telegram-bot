@@ -2,7 +2,10 @@ from catchbot.router_bot import RouterBot
 from .celery_app import app
 
 
-bot = RouterBot.from_env()
+try:
+    bot = RouterBot.from_env()
+except:
+    print('Failed to create bot')
 
 
 @app.task
