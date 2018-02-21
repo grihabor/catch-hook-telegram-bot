@@ -26,5 +26,5 @@ hosts:
         text: 'object_attributes.status'
       host: 'host'
       repository:
-        name: 'project.name'
+        name: 'project.name|repository.name'
         url: 'project.web_url'

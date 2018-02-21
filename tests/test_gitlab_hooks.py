@@ -33,5 +33,8 @@ def load_examples():
 def test_gitlab_hooks(headers, json_obj):
     from catchbot.message import create_message_for_user
 
-    create_message_for_user(headers, json_obj)
+    msg = create_message_for_user(headers, json_obj)
+
+    print(msg)
+    assert '!' not in msg
 
