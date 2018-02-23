@@ -58,11 +58,15 @@ def get_status_icon(content):
 
 
 def get_branch_name(content):
-    return content['ref']
+    return content['ref'].split('/')[-1]
 
 
 def get_branch_url(content):
-    return content['ref']
+    return '/'.join([
+        content['repository']['url'],
+        'tree',
+        content['ref'],
+    ])
 
 
 def get_status_text(content):
