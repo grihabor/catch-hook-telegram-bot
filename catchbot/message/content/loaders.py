@@ -3,7 +3,9 @@ from furl import furl
 OK = '✅'
 FAIL = '❌'
 OPEN = '🆕'
-
+STAR = '✴️'
+PAUSE = '⏸'
+PLAY = '▶️'
 
 def get_loaders():
     arr = [
@@ -39,16 +41,32 @@ def get_status_icon(content):
     if any([content['event'] == 'merge_request' and content['merge']['action'] == 'open',
             content['event'] == 'issue' and content['issue']['action'] == 'open']):
         return OPEN
-
+    
+    if content['event'] == 'merge_request' and content['merge']['action'] == 'merge':
+        return OK
+    
+    if content['event'] == 'merge_request' and content['merge']['action'] == 'update':
+        return STAR
+     
+    if content['event'] == 'pipeline' and content['status'] == 'pending':
+        return PAUSE
+     
+    if content['event'] == 'pipeline' and content['status'] == 'running':
+        return PLAY
+     
     return FAIL
 
 
 def get_branch_name(content):
-    return content['ref']
+    return content['ref'].split('/')[-1]
 
 
 def get_branch_url(content):
-    return content['ref']
+    return '/'.join([
+        content['repository']['url'],
+        'tree',
+        content['ref'],
+    ])
 
 
 def get_status_text(content):

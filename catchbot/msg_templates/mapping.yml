@@ -20,7 +20,7 @@ hosts:
   gitlab:
     header: 'X-Gitlab-Event'
     static:
-      ref: 'ref'
+      ref: 'ref|object_attributes.ref'
       action: 'action'
       event: 'object_kind'
       status:
@@ -31,6 +31,9 @@ hosts:
         name: 'project.name|repository.name'
         url: 'project.web_url'
         default_branch: 'project.default_branch'
+      commit:
+        hash: 'commit.id'
+        url: 'commit.url'
       merge:
         target:
           branch: 'object_attributes.target_branch'
