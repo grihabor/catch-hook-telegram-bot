@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+import pytest
 
 
 _github_url = 'https://developer.github.com/v3/activity/events/types/'
