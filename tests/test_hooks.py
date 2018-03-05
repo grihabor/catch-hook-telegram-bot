@@ -22,7 +22,7 @@ def load_github_samples():
     for sample in text_samples[1:]:
         if sample.strip().startswith('{'):
             content = json.loads(sample)
-            headers = {'': prev}
+            headers = {'X-GitHub-Event': prev}
             yield headers, content
         
         prev = sample
