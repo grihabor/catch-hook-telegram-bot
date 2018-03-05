@@ -58,7 +58,7 @@ def load_all_samples():
     )
 
 
-@pytest.mark.parametrize('headers,json_obj', _samples)
+@pytest.mark.parametrize('headers,json_obj', load_all_samples())
 def test_hooks(headers, json_obj):
     from catchbot.message import create_message_for_user
 
