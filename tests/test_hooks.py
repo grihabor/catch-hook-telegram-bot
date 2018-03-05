@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from pprint import pprint
 import pytest
 import itertools
+import json
 
 
 _github_url = 'https://developer.github.com/v3/activity/events/types/'
@@ -22,7 +23,7 @@ def load_github_samples():
     
     prev = text_samples[0]
     for sample in text_samples[1:]:
-        if sample.strip().startswith('{'):
+        if sample.strip().startswjith('{'):
             content = json.loads(sample)
             headers = {'X-GitHub-Event': prev}
             yield headers, content
