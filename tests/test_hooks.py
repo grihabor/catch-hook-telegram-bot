@@ -14,11 +14,11 @@ def load_github_samples():
     soup = BeautifulSoup(r.content)
     code_samples = soup.find_all('code')
 
-    text_samples = (
+    text_samples = [
         sample.text
         for sample
         in code_samples
-    )
+    ]
     
     prev = text_samples[0]
     for sample in text_samples[1:]:
