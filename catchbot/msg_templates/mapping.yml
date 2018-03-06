@@ -7,18 +7,25 @@ dynamic:
   create_merge_request_url: 'get_gitlab_create_merge_request_url'
 
 hosts:
+
   github:
+  
     header: 'X-GitHub-Event'
     store_header_value: 'event'
+    
     static:
       ref: 'ref'
       action: 'action'
       host: 'host'
+      event: 'event'
       repository:
         name: 'repository.name'
         url: 'repository.url'
+        
   gitlab:
+  
     header: 'X-Gitlab-Event'
+    
     static:
       ref: 'ref|object_attributes.ref'
       action: 'action'
