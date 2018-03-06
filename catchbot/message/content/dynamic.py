@@ -1,4 +1,9 @@
+import logging
 
+def _get_logger():
+    return logging.getLogger(__name__)
+    
+    
 def get_dynamic_msg_content(mapping, static_content, loaders):
     result = {}
 
