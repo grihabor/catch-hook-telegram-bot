@@ -24,6 +24,9 @@ hosts:
       repository:
         name: 'repository.name'
         url: 'repository.url'
+      commit:
+        hash: 'commit.sha'
+        url: 'commit.html_url'
         
   gitlab:
   
