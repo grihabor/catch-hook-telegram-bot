@@ -1,2 +1,5 @@
 *{repository[name]}*
-{status[icon]} {event} {state}
+{status[icon]} {event} {status[text]}
+
+Branch: [{branch[name]}]({branch[url]})
+Commit: [{commit[hash]}]({commit[url]})
