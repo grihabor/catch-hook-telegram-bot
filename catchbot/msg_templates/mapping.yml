@@ -18,6 +18,7 @@ hosts:
       action: 'action'
       host: 'host'
       event: 'event'
+      compare: 'compare'
       repository:
         name: 'repository.name'
         url: 'repository.url'
