@@ -37,7 +37,7 @@ def get_status_icon(content):
         content['event'] in _ok_response,
         content['event'] == 'pipeline' and content['status']['text'] == 'success',
         content['event'] == 'merge_request' and content['merge']['action'] == 'merge',
-        content['event'] == 'status' and content['state'] == 'success',
+        content['event'] == 'status' and content['status']['text'] == 'success',
     ])
     
     if is_ok:
@@ -54,7 +54,7 @@ def get_status_icon(content):
         return PAUSE
      
     if any([content['event'] == 'pipeline' and content['status']['text'] == 'running',
-            content['event'] == 'status' and content['state'] == 'pending']):
+            content['event'] == 'status' and content['status']['text'] == 'pending']):
         return PLAY
      
     return FAIL
