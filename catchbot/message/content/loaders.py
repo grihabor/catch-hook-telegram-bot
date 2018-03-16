@@ -61,9 +61,9 @@ def get_status_icon(content):
 
 
 def get_branch_name(content):
-    if 'ref' in content:
+    if content['host'] == 'gitlab':
         return content['ref'].split('/')[-1]
-    if 'branches' in content:
+    elif content['host'] == 'github':
         return content['branches'][0]['name']
 
 def get_branch_url(content):
