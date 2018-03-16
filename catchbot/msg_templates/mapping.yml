@@ -19,6 +19,7 @@ hosts:
       host: 'host'
       event: 'event'
       compare: 'compare'
+      branches: 'branches'
       status:
         text: 'state'
       repository:
