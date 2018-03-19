@@ -64,7 +64,9 @@ def get_branch_name(content):
     if content['host'] == 'gitlab':
         return content['ref'].split('/')[-1]
     elif content['host'] == 'github':
-        return content['branches'][0]['name']
+        branches = content['branches']
+        if isinstance(branches, list):
+            return branches[0]['name']
 
 def get_branch_url(content):
     return '/'.join([
