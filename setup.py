@@ -9,14 +9,14 @@ EMAIL = 'grihabor@gmail.com'
 AUTHOR = 'Borodin Gregory'
 
 REQUIRED = [
-    'python-telegram-bot',
-    'flask',
-    'gunicorn',
-    'celery',
-    'pyyaml',
+    'python-telegram-bot==10.1.0',
+    'flask==1.0.2',
+    'gunicorn==19.8.1',
+    'celery==4.2.0',
+    'pyyaml==3.12',
     'beautifulsoup4',
-    'requests',
-    'furl',
+    'requests==2.19.1',
+    'furl==1.1',
 ]
 
 
