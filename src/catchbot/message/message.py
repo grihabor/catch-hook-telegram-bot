@@ -1,5 +1,6 @@
 import os
 from pprint import pprint
+from pkg_resources import resource_string
 
 from catchbot.message.header_parser import get_info_from_headers
 from .content import get_message_content_for_user
@@ -11,15 +12,15 @@ DEFAULT_PATH = os.path.join(
 )
     
     
-def _get_template_path(json_obj):
-    path = os.path.join(
-        DIR_TEMPLATES,
+def _get_template_string(json_obj):
+    path = '/'.join([
+        'etc',
         json_obj['host'],
         '{}.md'.format(json_obj['event']),
-    )
+    ])
     if not os.path.exists(path):
-        path = DEFAULT_PATH
-    return path
+        path = 'etc/default.md'
+    return resource_string('catchbot', path)
     
 
 def _render_template(json_obj, path):
@@ -45,8 +46,8 @@ def _get_msg_content(headers, json_obj):
 
 def create_message_for_user(headers, json_obj, limit=4096):
     msg_content = _get_msg_content(headers, json_obj)
-    path = _get_template_path(msg_content)
-    msg = _render_template(msg_content, path)
+    template_string = _get_template_string(msg_content)
+    msg = _render_template(msg_content, template_string)
     return (
         msg
         if len(msg) < limit
