@@ -60,6 +60,9 @@ def main():
             'pytest-cov',
         ],
         include_package_data=True,
+        package_data={
+            '': ['*.md', '*.md',],
+        },
         license='MIT',
         long_description=get_readme(),
         classifiers=[
