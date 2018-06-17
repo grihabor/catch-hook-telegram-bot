@@ -49,7 +49,8 @@ def main():
         author=AUTHOR,
         author_email=EMAIL,
         url=URL,
-        packages=find_packages(exclude=('tests',)),
+        package_dir={'': 'src'},
+        packages=find_packages('src'),
         install_requires=REQUIRED,
         setup_requires=[
             'pytest-runner',
