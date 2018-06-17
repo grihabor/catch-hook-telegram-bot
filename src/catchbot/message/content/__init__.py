@@ -1,4 +1,5 @@
 from catchbot.message.content.loaders import get_loaders
+
 from .dynamic import get_dynamic_msg_content
 from .static import get_static_msg_content
 
@@ -22,4 +23,3 @@ def get_message_content_for_user(json_obj, static_mapping, dynamic_mapping):
     dynamic_content = get_dynamic_msg_content(dynamic_mapping, static_content, get_loaders())
 
     return merge(static_content, dynamic_content)
-

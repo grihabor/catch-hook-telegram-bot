@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.mark.parametrize('mapping,static_content,loaders,expected', [
     ({}, {}, {}, {}),
     ({'branch': 'get_branch'},

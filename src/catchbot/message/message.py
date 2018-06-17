@@ -1,37 +1,34 @@
 import os
-from pprint import pprint
-from pkg_resources import resource_string
 
-from catchbot.message.header_parser import get_info_from_headers
-from .content import get_message_content_for_user
+import catchbot
 from catchbot.config import DIR_TEMPLATES, load_mapping
+from catchbot.message.header_parser import get_info_from_headers
+from pkg_resources import resource_string, resource_exists
 
+from .content import get_message_content_for_user
 
 DEFAULT_PATH = os.path.join(
     DIR_TEMPLATES, 'default.md'
 )
-    
-    
+
+
 def _get_template_string(json_obj):
     path = '/'.join([
         'etc',
         json_obj['host'],
         '{}.md'.format(json_obj['event']),
     ])
-    if not os.path.exists(path):
+    if not resource_exists(catchbot.__name__, path):
         path = 'etc/default.md'
-    return resource_string('catchbot', path)
-    
 
-def _render_template(json_obj, path):
-    with open(path, 'r') as f:
-        template = f.read()
+    return resource_string(catchbot.__name__, path).decode('utf-8')
 
-    return template.format(**json_obj)
-    
+
+def _render_template(json_obj, template_string):
+    return template_string.format(**json_obj)
+
 
 def _get_msg_content(headers, json_obj):
-
     json_obj.update(get_info_from_headers(headers))
 
     mapping = load_mapping()

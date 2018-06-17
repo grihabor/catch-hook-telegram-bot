@@ -1,6 +1,6 @@
 from catchbot.router_bot import RouterBot
-from .celery_app import app
 
+from .celery_app import app
 
 try:
     bot = RouterBot.from_env()

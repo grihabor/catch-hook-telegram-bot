@@ -1,7 +1,7 @@
 import os
-import yaml
-from pkg_resources import resource_string
 
+import yaml
+from pkg_resources import resource_stream
 
 DIR_TEMPLATES = os.path.abspath(os.path.join(
     os.path.abspath(__file__),
@@ -11,6 +11,5 @@ DIR_TEMPLATES = os.path.abspath(os.path.join(
 
 
 def load_mapping():
-    path = resource_string('catchbot', 'etc/mapping.yml')
-    with open(path, 'r') as f:
+    with resource_stream('catchbot', 'etc/mapping.yml') as f:
         return yaml.load(f)

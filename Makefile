@@ -1,3 +1,5 @@
+PYTHON = python3.6
+
 all: help
 
 .PHONY: help
@@ -7,7 +9,7 @@ help:
 
 # venv
 venv:
-	python3 -m virtualenv venv
+	$(PYTHON) -m virtualenv venv
 
 .PHONY: install
 # install
