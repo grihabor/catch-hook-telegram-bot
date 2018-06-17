@@ -1,3 +1,5 @@
+include version/Makefile.version
+
 PYTHON = python3.6
 
 all: help
