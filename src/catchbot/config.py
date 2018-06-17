@@ -1,5 +1,6 @@
 import os
 import yaml
+from pkg_resources import resource_string
 
 
 DIR_TEMPLATES = os.path.abspath(os.path.join(
@@ -8,14 +9,8 @@ DIR_TEMPLATES = os.path.abspath(os.path.join(
     'msg_templates',
 ))
 
-PATH_MAPPING = os.path.join(
-    DIR_TEMPLATES,
-    'mapping.yml',
-)
-
 
 def load_mapping():
-    with open(PATH_MAPPING, 'r') as f:
+    path = resource_string('catchbot', 'etc/mapping.yml')
+    with open(path, 'r') as f:
         return yaml.load(f)
-        
-        
