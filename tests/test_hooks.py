@@ -1,10 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
-from pprint import pprint
-import pytest
 import itertools
 import json
 
+import pytest
+import requests
+from bs4 import BeautifulSoup
 
 _github_url = 'https://developer.github.com/v3/activity/events/types/'
 _gitlab_url = 'https://docs.gitlab.com/ce/user/project/integrations/webhooks.html'
@@ -20,16 +19,16 @@ def load_github_samples():
         for sample
         in code_samples
     ]
-    
+
     prev = text_samples[0]
     for sample in text_samples[1:]:
         if sample.strip().startswith('{'):
             content = json.loads(sample)
             headers = {'X-GitHub-Event': prev}
             yield headers, content
-        
+
         prev = sample
-        
+
 
 def load_gitlab_samples():
     r = requests.get(_gitlab_url)
@@ -68,6 +67,3 @@ def test_hooks(headers, json_obj):
 
     print(msg)
     assert '!' not in msg
-    
-    
-    

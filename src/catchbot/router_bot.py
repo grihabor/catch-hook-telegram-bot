@@ -3,7 +3,6 @@ import os
 
 from .updater import create_updater
 
-
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO,
@@ -28,5 +27,3 @@ class RouterBot:
             text=text,
             parse_mode=parse_mode,
         )
-        
-        

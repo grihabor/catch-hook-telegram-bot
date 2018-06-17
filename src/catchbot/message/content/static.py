@@ -1,5 +1,3 @@
-
-
 def _get_value_by_path(json_obj, path):
     value = json_obj
 
@@ -35,4 +33,3 @@ def get_static_msg_content(mapping, json_obj):
         result[key] = _get_value_by_variants(json_obj, path)
 
     return result
-

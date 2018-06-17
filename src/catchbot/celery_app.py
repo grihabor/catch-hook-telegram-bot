@@ -1,4 +1,5 @@
 import os
+
 from celery import Celery
 
 
@@ -10,11 +11,11 @@ def _get_broker():
         vhost=os.environ['RABBITMQ_DEFAULT_VHOST'],
     )
 
+
 try:
     broker = _get_broker()
 except:
     print('Failed to get celery broker')
     broker = None
-
 
 app = Celery('tasks', broker=broker)

@@ -2,7 +2,6 @@ from catchbot.config import load_mapping
 
 
 def get_info_from_headers(headers):
-
     _value = None
     _host = None
 

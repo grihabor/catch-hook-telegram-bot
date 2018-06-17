@@ -1,7 +1,5 @@
-import os
-from flask import request, jsonify, redirect
+from flask import request, redirect
 
-from catchbot.message.header_parser import get_info_from_headers
 from .message import create_message_for_user
 from .tasks import send_message_to_bot
 
@@ -30,7 +28,3 @@ def register_routes(app):
     @app.route('/', methods=['GET'])
     def root():
         return _root()
-
-
-
-

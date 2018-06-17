@@ -12,7 +12,7 @@ def _hook_url(chat_id):
 
 def start(bot, update):
     bot.send_message(
-        chat_id=update.message.chat_id, 
+        chat_id=update.message.chat_id,
         text='\n'.join([
             'Hi!',
             '',
