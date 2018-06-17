@@ -26,7 +26,7 @@ def _get_project_path():
 
 def get_version():
     project_path = _get_project_path()
-    init_path = os.path.join(project_path, NAME, '__init__.py')
+    init_path = os.path.join(project_path, 'src', NAME, '__init__.py')
     with open(init_path, 'r') as f:
         for line in f:
             if line.startswith('__version__'):
