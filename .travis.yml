@@ -1,5 +1,7 @@
 git:
-  depth: 5
+  submodules: false
+before_install:
+  - git submodule update --init --recursive
 
 language: python
 python: "3.6"
