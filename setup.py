@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 
 NAME = 'catchbot'
-DESCRIPTION = 'Catch hook telegram boot'
+DESCRIPTION = 'Telegram bot to catch your hooks from Github, Gitlab and more'
 URL = 'https://github.com/grihabor/catch-hook-telegram-bot'
 EMAIL = 'grihabor@gmail.com'
 AUTHOR = 'Borodin Gregory'
