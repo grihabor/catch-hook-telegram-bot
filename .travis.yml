@@ -12,7 +12,7 @@ install:
 script:
   - make test
 
-before_deploy:
+after_success:
   - git tag -f "$(make tag-minor)"
 
 deploy:
