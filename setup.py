@@ -1,6 +1,11 @@
+import logging
 import subprocess
 import os
 from setuptools import find_packages, setup
+
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 
 NAME = 'catchbot'
@@ -26,7 +31,13 @@ def _get_project_path():
 
 
 def get_version():
-    return subprocess.check_output(["make", "version-minor"]).decode('utf-8').strip()
+    v = subprocess.check_output([
+        "make",
+        "--no-print-directory",
+        "version-minor",
+    ]).decode('utf-8').strip()
+    log.info('Version {}'.format(v))
+    return v
 
 
 def get_readme():
