@@ -12,8 +12,8 @@ install:
 script:
   - make test
 
-after_success:
-  - git tag -f "$(make tag-minor)"
+before_deploy:
+  - git tag "$(make tag-minor)"
 
 deploy:
   - provider: pypi
