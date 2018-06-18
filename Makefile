@@ -18,3 +18,10 @@ install:
 test:
 	python setup.py test
 
+.PHONY: sdist
+sdist:
+	python setup.py sdist
+
+.PHONY: wheel
+wheel:
+	python setup.py bdist_wheel
