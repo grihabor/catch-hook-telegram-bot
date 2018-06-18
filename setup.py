@@ -1,3 +1,4 @@
+import subprocess
 import os
 from setuptools import find_packages, setup
 
@@ -25,13 +26,7 @@ def _get_project_path():
 
 
 def get_version():
-    project_path = _get_project_path()
-    init_path = os.path.join(project_path, 'src', NAME, '__init__.py')
-    with open(init_path, 'r') as f:
-        for line in f:
-            if line.startswith('__version__'):
-                version_string = line.split('=')[-1].strip()
-                return version_string.strip("'")
+    return subprocess.check_output(["make", "version-minor"]).decode('utf-8')
 
 
 def get_readme():
