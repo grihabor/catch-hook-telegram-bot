@@ -12,6 +12,9 @@ install:
 script:
   - make test
 
+before_deploy:
+  - git tag -f "$(make tag-minor)"
+
 deploy:
   provider: pypi
   user: ${PYPI_USER}
