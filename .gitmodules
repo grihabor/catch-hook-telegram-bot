@@ -1,0 +1,3 @@
+[submodule "version"]
+	path = version
+	url = https://gist.github.com/4a750b9d82c9aa55d5276bd5503829be
