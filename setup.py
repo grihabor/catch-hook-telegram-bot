@@ -26,7 +26,7 @@ def _get_project_path():
 
 
 def get_version():
-    return subprocess.check_output(["make", "version-minor"]).decode('utf-8')
+    return subprocess.check_output(["make", "version-minor"]).decode('utf-8').strip()
 
 
 def get_readme():
