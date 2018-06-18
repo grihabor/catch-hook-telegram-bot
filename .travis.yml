@@ -20,11 +20,16 @@ before_deploy:
   - git config --global user.email "builds@travis-ci.org"
   - export TAG=$(make tag-minor)
   - git tag $TAG
-  - git push origin $TAG
 
 deploy:
   - provider: script
     script: make deploy
+    skip_cleanup: true
+    on:
+      branch: master
+      tags: false
+  - provider: releases
+    api_key: ${GITHUB_TOKEN}
     skip_cleanup: true
     on:
       branch: master
