@@ -12,18 +12,18 @@ install:
 script:
   - make test
 
-after_success:
-  - git tag -f "$(make tag-minor)"
+before_deploy:
+  - git tag "$(make tag-minor)"
 
 deploy:
-  provider: pypi
-  user: ${PYPI_USER}
-  password: ${PYPI_PASSWORD}
-  skip_cleanup: true
-  distributions: "sdist bdist_wheel"
-  on:
-    branch: master
-    tags: true
+  - provider: pypi
+    user: ${PYPI_USER}
+    password: ${PYPI_PASSWORD}
+    skip_cleanup: true
+    distributions: "sdist bdist_wheel"
+    on:
+      branch: master
+      tags: false
 
 notifications:
   webhooks:
