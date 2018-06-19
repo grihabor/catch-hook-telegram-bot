@@ -23,14 +23,14 @@ before_deploy:
   - git tag $TAG
 
 deploy:
-  - provider: script
-    script: make deploy
+  - provider: releases
+    api_key: ${GITHUB_TOKEN}
     skip_cleanup: true
     on:
       branch: master
       tags: false
-  - provider: releases
-    api_key: ${GITHUB_TOKEN}
+  - provider: script
+    script: make deploy
     skip_cleanup: true
     on:
       branch: master
