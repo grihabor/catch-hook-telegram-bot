@@ -1,5 +1,7 @@
-hook:
+xhook:
   status:
+    text:
+      gitlab: 'object_attributes.status'
     icon:
       dynamic: 'get_status_icon'
   branch: 
@@ -7,51 +9,53 @@ hook:
       dynamic: 'get_branch_name'
     url: 
       dynamic: 'get_branch_url'
+  create_merge_request_url:
+    dynamic: 'get_gitlab_create_merge_request_url'
+  header:
+    value:
+      github: 'X-GitHub-Event'
+      gitlab: 'X-Gitlab-Event'
+    store:
+      github: 'event'
+  ref:
+    github: 'ref'
+    gitlab: 
+      - 'ref'
+      - 'object_attributes.ref'
+  action:
+    github: 'action'
+    gitlab: 'action'
+  host:
+    github: 'host'
+    gitlab: 'host'
+  event:
+    github: 'event'
+    gitlab: 'object_kind'
+  compare:
+    github: 'compare'
 
-dynamic: 
-  status:
-    icon: 'get_status_icon'
-  branch: 
-    name: 'get_branch_name'
-    url: 'get_branch_url'
-  create_merge_request_url: 'get_gitlab_create_merge_request_url'
+  repository:
+    name:
+      github: 'repository.name'
+      gitlab:
+        - 'project.name'
+        - 'repository.name'
+    url:
+      github: 'repository.url'
+      gitlab: 'project.web_url'
+    default_branch:
+      gitlab: 'project.default_branch'
+  commit:
+    hash:
+      gitlab: 'commit.id'
+    url:
+      gitlab: 'commit.url'
 
-hosts:
 
-  github:
-  
-    header: 'X-GitHub-Event'
-    store_header_value: 'event'
-    
-    static:
-      ref: 'ref'
-      action: 'action'
-      host: 'host'
-      event: 'event'
-      compare: 'compare'
-      repository:
-        name: 'repository.name'
-        url: 'repository.url'
-        
   gitlab:
-  
-    header: 'X-Gitlab-Event'
     
     static:
-      ref: 'ref|object_attributes.ref'
-      action: 'action'
-      event: 'object_kind'
-      status:
-        text: 'object_attributes.status'
-      host: 'host'
-      repository:
-        id: 'project.id'
-        name: 'project.name|repository.name'
-        url: 'project.web_url'
-        default_branch: 'project.default_branch'
-      commit:
-        hash: 'commit.id'
-        url: 'commit.url'
+
       merge:
         target:
           branch: 'object_attributes.target_branch'
