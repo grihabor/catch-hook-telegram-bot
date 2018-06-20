@@ -11,15 +11,15 @@ def test_hook_yaml():
 
 
 def test_hook_tree_load():
-	from catchbot import hook.tree
+    import catchbot.hook.tree
 	
-	assert hook.tree.load()
+	assert catchbot.hook.tree.load()
 	
 
 @pytest.mark.parametrize('hook_tree', [])
 def test_hook_tree_validate_errors(hook_tree):
-	from catchbot import hook.tree
+	import catchbot.hook.tree
 	
 	with pytest.raises(hook.tree.HookTreeError):
-		hook.tree.validate(hook_tree)
+		catchbot.hook.tree.validate(hook_tree)
 	
