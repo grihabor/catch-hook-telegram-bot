@@ -24,8 +24,9 @@ def test_hook_tree_load():
 ])
 def test_hook_tree_validate_errors(message, hook_tree):
     import catchbot.hook.tree
+    from catchbot.hook.tree import HookTreeError
 
-    with pytest.raises(hook.tree.HookTreeError) as excinfo:
+    with pytest.raises(HookTreeError) as excinfo:
         catchbot.hook.tree.validate(hook_tree)
         assert message == str(excinfo.value)
 	
