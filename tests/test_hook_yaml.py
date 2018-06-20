@@ -16,7 +16,12 @@ def test_hook_tree_load():
     assert catchbot.hook.tree.load()
 	
 
-@pytest.mark.parametrize('hook_tree', [])
+@pytest.mark.parametrize('message,hook_tree', [
+    ('', {}),
+    ('', {"types": []}),
+    ('', {"hook": {}}),
+    ('', {"hook": {}, "types": {}}),
+])
 def test_hook_tree_validate_errors(hook_tree):
     import catchbot.hook.tree
 
