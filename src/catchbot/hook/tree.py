@@ -11,7 +11,7 @@ class HookTreeError(ValueError):
 	pass
 	
 
-def load_hook_tree():
+def load():
 	path = 'etc/hook.yaml'
 	with resource_stream(catchbot.__name__, path) as f:
 		return yaml.load(f)
@@ -46,7 +46,7 @@ def _validate_hook_tree(hook_tree, types):
     	raise BadHookTree(msg)
             
             
-def validate_hook_tree(hook_tree):
+def validate(hook_tree):
 	if not isinstance(hook_tree, dict):
         msg = "HookTree must be a dict subclass, got: {}".format(type(hook_tree))
         raise BadHookTree(msg)
