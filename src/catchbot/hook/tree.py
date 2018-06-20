@@ -7,9 +7,13 @@ _HOOK = 'hook'
 _TYPES = 'types'
 
 
-class BadHookTree(Exception):
-	pass
-	
+class HookTreeError(Exception):
+    pass
+
+
+class BadHookTree(HookTreeError):
+    pass
+   
 
 def load():
     path = 'etc/hook.yaml'
