@@ -1,4 +1,4 @@
-*.md
-*.yaml
-*.yml
-*.rst
+include *.md
+include *.yaml
+include *.yml
+include *.rst
