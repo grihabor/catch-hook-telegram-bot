@@ -3,7 +3,7 @@ import yaml
 
 
 def test_hook_yaml():
-	import catchbot
+    import catchbot
 
     with resource_stream(catchbot.__name__, 'etc/hook.yaml') as f:
         obj = yaml.load(f)
