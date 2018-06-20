@@ -7,7 +7,7 @@ _HOOK = 'hook'
 _TYPES = 'types'
 
 
-class HookTreeError(ValueError):
+class BadHookTree(Exception):
 	pass
 	
 
