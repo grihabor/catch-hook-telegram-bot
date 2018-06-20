@@ -17,10 +17,10 @@ def test_hook_tree_load():
 	
 
 @pytest.mark.parametrize('message,hook_tree', [
-    ('', {}),
-    ('', {"types": []}),
-    ('', {"hook": {}}),
-    ('', {"hook": {}, "types": {}}),
+    ("HookTree must provide a 'types' attribute", {}),
+    ("HookTree must provide a 'hook' attribute", {"types": []}),
+    ("HookTree must provide a 'types' attribute", {"hook": {}}),
+    ('', {"hook": {"repository": "project"}, "types": []}),
 ])
 def test_hook_tree_validate_errors(message, hook_tree):
     import catchbot.hook.tree
@@ -29,5 +29,5 @@ def test_hook_tree_validate_errors(message, hook_tree):
     with pytest.raises(HookTreeError) as excinfo:
         catchbot.hook.tree.validate(hook_tree)
    
-    assert message == str(excinfo.value)
+    assert message in str(excinfo.value)
 	
