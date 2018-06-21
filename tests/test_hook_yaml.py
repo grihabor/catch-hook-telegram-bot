@@ -23,11 +23,8 @@ def test_hook_tree_load():
     ("Types restriction is not satisfied, got: {'repository'}", {
         "hook": {"repository": "project"}, 
         "types": [],
-    }), ("Types restriction is not satisfied, got: {'project'}", {
+    }), ("List items must be of <class 'str'> type, got [{}, {}]", {
         "hook": {"project": [{}, {}]},
-        "types": [],
-    }), ("Types restriction is not satisfied, got: {'name'}", {
-        "hook": {"project": [{"id": "id"}, {"name": "name"}]},
         "types": [],
     }),
 ])
