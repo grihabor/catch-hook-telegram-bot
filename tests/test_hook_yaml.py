@@ -26,6 +26,17 @@ def test_hook_tree_load():
     }), ("List items must be of <class 'str'> type, got [{}, {}]", {
         "hook": {"project": [{}, {}]},
         "types": [],
+    }), ("", {
+        "hook": object(),
+        "types": [],
+    }), ("", {
+        "hook": {
+            "author": {
+                "github": "commiter",
+                "gitlab": "author",
+            },
+        },
+        "types": ["gitlab", "github"],
     }),
 ])
 def test_hook_tree_validate_errors(message, hook_tree):
