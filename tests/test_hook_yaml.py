@@ -23,8 +23,11 @@ def test_hook_tree_load():
     ("Types restriction is not satisfied, got: {'repository'}", {
         "hook": {"repository": "project"}, 
         "types": [],
-    }), ("", {
-        "hook": {"name": [{}, {}]},
+    }), ("Types restriction is not satisfied, got: {'project'}", {
+        "hook": {"project": [{}, {}]},
+        "types": [],
+    }), ("Types restriction is not satisfied, got: {'name'}", {
+        "hook": {"project": [{"id": "id"}, {"name": "name"}]},
         "types": [],
     }),
 ])
@@ -41,7 +44,7 @@ def test_hook_tree_validate_errors(message, hook_tree):
 @pytest.mark.parametrize('hook_tree', [
     ({"hook": {}, "types": []}),
 ])
-def test_hook_tree_validate(message, hook_tree):
+def test_hook_tree_validate(hook_tree):
     import catchbot.hook.tree
     
     catchbot.hook.tree.validate(hook_tree)
