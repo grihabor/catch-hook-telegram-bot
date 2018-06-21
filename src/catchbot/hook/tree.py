@@ -39,13 +39,18 @@ def _validate_hook_tree(hook_tree, types):
     for value in hook_tree.values():
         _validate_hook_tree(value, types)
     
-    has_list_child = any(isinstance(value, list) for value in hook_tree.values())
-    has_str_child = any(isinstance(value, str) for value in hook_tree.values())
-    if not (has_list_child or has_str_child):
-        return
+    all_dict_children = all(
+        isinstance(value, dict)
+        for value in hook_tree.values()
+    )
+    if all_dict_children:
+    	return
     
-    all_dict_children = all(isinstance(value, dict) for value in hook_tree.values())
-    if not all_dict_children:
+    all_list_or_str_child = all(
+        isinstance(value, list) or isinstance(value, str)
+        for value in hook_tree.values()
+    )
+    if not all_list_or_str_child:
         msg = 'All children must be either of {} type or any of ({}, {}) types'.format(dict, str, list)
         raise BadHookTree(msg)
     
