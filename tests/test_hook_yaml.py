@@ -26,7 +26,7 @@ def test_hook_tree_load():
     }), ("List items must be of <class 'str'> type, got [{}, {}]", {
         "hook": {"project": [{}, {}]},
         "types": [],
-    }), ("", {
+    }), ("Unexpected type, got <class 'object'>", {
         "hook": object(),
         "types": [],
     }), ("", {
@@ -35,6 +35,7 @@ def test_hook_tree_load():
                 "github": "commiter",
                 "gitlab": "author",
             },
+            "project": "repository",
         },
         "types": ["gitlab", "github"],
     }),
