@@ -29,7 +29,7 @@ def test_hook_tree_load():
     }), ("Unexpected type, got <class 'object'>", {
         "hook": object(),
         "types": [],
-    }), ("", {
+    }), ("All children must be either of <class 'dict'> type or any of (<class 'str'>, <class 'list'>) types", {
         "hook": {
             "author": {
                 "github": "commiter",
