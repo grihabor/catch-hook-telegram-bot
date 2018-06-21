@@ -20,7 +20,13 @@ def test_hook_tree_load():
     ("HookTree must provide a 'types' attribute", {}),
     ("HookTree must provide a 'hook' attribute", {"types": []}),
     ("HookTree must provide a 'types' attribute", {"hook": {}}),
-    ('', {"hook": {"repository": "project"}, "types": []}),
+    ("Types restriction is not satisfied, got: {'repository'}", {
+        "hook": {"repository": "project"}, 
+        "types": [],
+    }), ("", {
+        "hook": {"name": [{}, {}]},
+        "types": [],
+    }),
 ])
 def test_hook_tree_validate_errors(message, hook_tree):
     import catchbot.hook.tree
