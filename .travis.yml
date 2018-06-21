@@ -20,7 +20,7 @@ before_deploy:
   - git config --global user.name "Travis"
   - git config --global user.email "builds@travis-ci.org"
   - export TAG=$(make tag-minor)
-  - git tag $TAG
+  - git tag -f $TAG
 
 deploy:
   - provider: releases
