@@ -4,6 +4,7 @@ import catchbot
 from catchbot.config import DIR_TEMPLATES, load_mapping
 from catchbot.message.header_parser import get_info_from_headers
 from pkg_resources import resource_string, resource_exists
+import yaml
 
 from .content import get_message_content_for_user
 
@@ -42,9 +43,14 @@ def _get_msg_content(headers, json_obj):
 
 
 def create_message_for_user(headers, json_obj, limit=4096):
-    msg_content = _get_msg_content(headers, json_obj)
-    template_string = _get_template_string(msg_content)
-    msg = _render_template(msg_content, template_string)
+    # msg_content = _get_msg_content(headers, json_obj)
+    # template_string = _get_template_string(msg_content)
+    # msg = _render_template(msg_content, template_string)
+    
+    msg = yaml.dump(dict(
+        headers=headers,
+        payload=json_obj,
+    ))
     return (
         msg
         if len(msg) < limit
