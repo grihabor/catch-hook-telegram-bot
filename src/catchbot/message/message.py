@@ -49,7 +49,7 @@ def _convert(data):
         return {
             key: _convert(value)
             for key, value
-            in data
+            in data.items()
         }
     else:
         return str(data)
