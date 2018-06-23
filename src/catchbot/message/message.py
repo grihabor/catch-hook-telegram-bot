@@ -42,14 +42,27 @@ def _get_msg_content(headers, json_obj):
     )
 
 
+def _convert(data):
+    if isinstance(data, list):
+        return list(map(_convert, data))
+    elif isinstance(data, dict):
+        return {
+            key: _convert(value)
+            for key, value
+            in data.items()
+        }
+    else:
+        return str(data)
+
+
 def create_message_for_user(headers, json_obj, limit=4096):
     # msg_content = _get_msg_content(headers, json_obj)
     # template_string = _get_template_string(msg_content)
     # msg = _render_template(msg_content, template_string)
     
     msg = yaml.dump(dict(
-        headers=headers,
-        payload=json_obj,
+        headers=_convert(headers),
+        payload=_convert(json_obj),
     ))
     return (
         msg
