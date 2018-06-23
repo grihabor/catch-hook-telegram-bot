@@ -10,4 +10,4 @@ except:
 
 @app.task
 def send_message_to_bot(chat_id, message):
-    bot.send_message(chat_id, message, parse_mode='Markdown')
+    bot.send_message(chat_id, message)
