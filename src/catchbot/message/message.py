@@ -50,7 +50,7 @@ def create_message_for_user(headers, json_obj, limit=4096):
     msg = yaml.dump(dict(
         headers=headers,
         payload=json_obj,
-    )
+    ))
     return (
         msg
         if len(msg) < limit
